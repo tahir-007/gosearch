@@ -64,7 +64,7 @@ const SearchInput = () => {
             <AiOutlineSearch className="flex text-sx mt-2 md:mt-3  sm:text-xl text-gray-500 mr-3" />
             <input
               type="text"
-              className="flex-grow border-transparent focus:border-transparent focus:ring-0 rounded-full "
+              className="flex-grow text-xs border-transparent focus:border-transparent focus:ring-0 rounded-full "
               placeholder=""
               value={changeData}
               onChange={handleChange}
@@ -78,7 +78,7 @@ const SearchInput = () => {
               {suggestions.map((suggestion) => (
                 <li
                   key={suggestion}
-                  className="px-4 py-2 cursor-pointer hover:bg-gray-100"
+                  className="px-4 py-2 cursor-pointer text-xs hover:bg-gray-100"
                   onClick={() => handleSelect(suggestion.displayText)}
                 >
                   {suggestion.displayText}
