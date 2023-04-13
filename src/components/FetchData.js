@@ -30,7 +30,6 @@ const FetchData = (props) => {
       });
     };
     fetchData();
-    console.log(props.searchQuery);
   }, []);
 
   const handleSelect = (related) => {
