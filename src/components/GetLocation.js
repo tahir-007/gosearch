@@ -13,11 +13,7 @@ const GetLocation = () => {
       SetLocation(response.data);
     });
   }, []);
-  return (
-    <div>
-      {location.city}, {location.region}, {location.country_name}
-    </div>
-  );
+  return <div>{location.country_name}</div>;
 };
 
 export default GetLocation;

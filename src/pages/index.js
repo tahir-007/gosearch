@@ -3,8 +3,9 @@ import { Inter } from "next/font/google";
 import Header from "@/pages/Header";
 import Image from "next/image";
 import Footer from "@/pages/Footer";
-import SearchInput from "@/pages/SearchInput";
+import HomeSearchBar from "@/pages/HomeSearchBar";
 import Languages from "./Languages";
+import Logo from "./Logo";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +17,7 @@ export default function Home() {
           Discover the World with goSearch - Your Ultimate Search Engine
         </title>
         <link rel="icon" href="/favicon.ico" />
-        <meta charset="UTF-8" />
+        <meta charSet="UTF-8" />
         <meta
           name="description"
           content="Looking for a fast and reliable search engine? Look no further than goSeache.com! Our advanced algorithms deliver accurate and relevant results in seconds. Whether you’re searching for the latest news, shopping deals, or travel destinations, goSeache.com has you covered. Start exploring the world with us today!"
@@ -30,8 +31,9 @@ export default function Home() {
       </Head>
       <div className="w-screen text-gray-700 bg-white dark:bg-gray-700 dark:text-white">
         <Header />
-        <div className="container">
-          <SearchInput />
+        <Logo />
+        <div className="">
+          <HomeSearchBar />
         </div>
         <Languages />
         <Footer />
