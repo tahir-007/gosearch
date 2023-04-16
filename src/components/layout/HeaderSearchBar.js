@@ -63,7 +63,7 @@ const HeaderSearchBar = ({ query, asPath }) => {
         <div className="flex grow justify-center md:flex-none md:justify-start">
           <Link href="/">
             <Image
-              src="/gosearch.png"
+              src="/gosearch.webp"
               alt="goSearch image"
               width={200}
               height={70}
