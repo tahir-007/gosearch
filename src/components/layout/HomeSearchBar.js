@@ -57,15 +57,15 @@ const HomeSearchBar = () => {
   return (
     <div className="relative">
       <div className="flex flex-col items-center mt-4 xl:mt-10 justify-center">
-        <div className="container flex justify-center items-center">
+        <div className="flex justify-center w-screen items-center">
           <form
             onSubmit={handleSubmit}
-            className="flex mt-5 mx-3 w-screen h-8 sm:h-max md:w-8/12 xl:w-5/12 border border-gray-200 px-3 py-1 rounded-full hover:shadow-md transition-shadow focus-within:shadaw-md"
+            className="flex items-center w-screen mt-5 mx-3 md:h-12 md:w-8/12 xl:w-5/12 border border-gray-200 px-3 rounded-full hover:shadow-md transition-shadow focus-within:shadaw-md"
           >
-            <AiOutlineSearch className="flex text-sx mt-1 sm:mt-2 sm:text-xl text-gray-500" />
+            <AiOutlineSearch className="flex sm:text-xl text-gray-500" />
             <input
               type="text"
-              className="flex-grow text-xs  md:text-sm border-transparent dark:bg-gray-700 focus:border-transparent focus:ring-0 rounded-full "
+              className="flex-grow md:text-sm border-transparent dark:bg-gray-700 focus:border-transparent focus:ring-0 rounded-full "
               placeholder=""
               value={changeData}
               onChange={handleChange}
@@ -81,25 +81,23 @@ const HomeSearchBar = () => {
                 </span>
               </>
             )}
-            <BsFillMicFill className="mt-1 text-xs sm:mt-2 text-blue-500 sm:text-xl" />
+            <BsFillMicFill className="text-blue-500 sm:text-xl" />
           </form>
         </div>
         <div className="container flex justify-center">
-          <div className="flex mx-3 w-screen md:w-8/12 xl:w-5/12 z-50">
+          <div className="flex mx-4 w-full md:w-8/12 xl:w-6/12 z-50">
             {suggestions.length > 0 && (
-              <div className="container">
-                <ul className="w-full py-3 z-10 bg-white dark:bg-gray-800 rounded-md shadow-md">
-                  {suggestions.map((suggestion) => (
-                    <li
-                      key={suggestion.displayText}
-                      className="px-4 py-2 cursor-pointer text-xs md:text-sm hover:bg-gray-100"
-                      onClick={() => handleSelect(suggestion.displayText)}
-                    >
-                      {suggestion.displayText}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <ul className="w-screen py-3 z-10 bg-white dark:bg-gray-800 rounded-md shadow-md">
+                {suggestions.map((suggestion) => (
+                  <li
+                    key={suggestion.id}
+                    className="px-4 py-2 cursor-pointer text-xs md:text-sm hover:bg-gray-100"
+                    onClick={() => handleSelect(suggestion.displayText)}
+                  >
+                    {suggestion.displayText}
+                  </li>
+                ))}
+              </ul>
             )}
           </div>
         </div>
