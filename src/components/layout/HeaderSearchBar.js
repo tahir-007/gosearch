@@ -45,7 +45,7 @@ const HeaderSearchBar = ({ query, asPath }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    window.location.assign(`${asPath}q=${changeData}`);
+    window.location.assign(`${asPath}?q=${changeData}`);
   };
 
   const handleSelect = (suggestion) => {
