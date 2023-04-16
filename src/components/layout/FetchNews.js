@@ -22,7 +22,7 @@ const FetchNews = ({ searchResults }) => {
                 <a
                   key={searchResult.id}
                   href={searchResult.url}
-                  className="block p-2 bg-white shadow-sm border mb-10 content-center rounded-xl"
+                  className="block p-2 bg-white shadow-sm border content-center rounded-xl"
                 >
                   <div className="flex items-center w-full">
                     <section className="w-5/6">
