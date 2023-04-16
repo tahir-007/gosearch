@@ -60,7 +60,7 @@ const HomeSearchBar = () => {
         <div className="flex justify-center w-screen items-center">
           <form
             onSubmit={handleSubmit}
-            className="flex items-center w-screen mt-5 mx-3 md:h-12 md:w-8/12 xl:w-5/12 border border-gray-200 px-3 rounded-full hover:shadow-md transition-shadow focus-within:shadaw-md"
+            className="flex items-center w-screen mt-5 h-12 mx-3 md:h-12 md:w-8/12 xl:w-5/12 border border-gray-200 px-3 rounded-full hover:shadow-md transition-shadow focus-within:shadaw-md"
           >
             <AiOutlineSearch className="flex sm:text-xl text-gray-500" />
             <input
@@ -84,22 +84,20 @@ const HomeSearchBar = () => {
             <BsFillMicFill className="text-blue-500 sm:text-xl" />
           </form>
         </div>
-        <div className="container flex justify-center">
-          <div className="flex mx-4 w-full md:w-8/12 xl:w-6/12 z-50">
-            {suggestions.length > 0 && (
-              <ul className="w-screen py-3 z-10 bg-white dark:bg-gray-800 rounded-md shadow-md">
-                {suggestions.map((suggestion) => (
-                  <li
-                    key={suggestion.id}
-                    className="px-4 py-2 cursor-pointer text-xs md:text-sm hover:bg-gray-100"
-                    onClick={() => handleSelect(suggestion.displayText)}
-                  >
-                    {suggestion.displayText}
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
+        <div className="flex mx-4 justify-center">
+          {suggestions.length > 0 && (
+            <ul className="absolute w-full md:w-5/12 py-3 z-10 bg-white dark:bg-gray-800 rounded-md shadow-md">
+              {suggestions.map((suggestion) => (
+                <li
+                  key={suggestion.id}
+                  className="px-4 py-2 cursor-pointer text-sm md:text-md hover:bg-gray-100"
+                  onClick={() => handleSelect(suggestion.displayText)}
+                >
+                  {suggestion.displayText}
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </div>
     </div>
