@@ -26,7 +26,7 @@ const FetchData = ({ query, asPath }) => {
         ? "https://api.bing.microsoft.com/v7.0/news/search"
         : asPath === "/images"
         ? "https://api.bing.microsoft.com/v7.0/images/search"
-        : "https://api.bing.microsoft.com/v7.0/videos";
+        : "https://api.bing.microsoft.com/v7.0/videos/search";
     const config = {
       params: {
         q: query,
