@@ -81,7 +81,6 @@ const HomeSearchBar = () => {
                 </span>
               </>
             )}
-            <BsFillMicFill className="text-blue-500 sm:text-xl" />
           </form>
         </div>
         <div className="flex mx-4 justify-center">

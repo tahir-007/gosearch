@@ -92,8 +92,7 @@ const HeaderSearchBar = ({ query, asPath }) => {
               </span>
             </>
           )}
-          <BsFillMicFill className="text-xs text-blue-500 sm:text-xl" />
-          <AiOutlineSearch className="flex text-sx sm:text-xl  text-blue-500 mx-2" />
+          <AiOutlineSearch className="flex text-sx sm:text-xl  text-blue-500 mr-4" />
         </form>
         <div className="flex md:w-6/12 md:justify-end">
           <AiOutlineSetting className="hidden bg-transparent text-gray-600 hover:bg-gray-200 rounded-full text-4xl p-2" />
@@ -125,11 +124,10 @@ const HeaderSearchBar = ({ query, asPath }) => {
             </span>
           </>
         )}
-        <BsFillMicFill className="text-lg text-blue-500 sm:text-xl" />
-        <AiOutlineSearch className="flex text-xl sm:text-xl  text-blue-500 mx-2" />
+        <AiOutlineSearch className="flex text-xl sm:text-xl  text-blue-500 mr-4" />
       </form>
       {suggestions.length > 0 && (
-        <ul className="absolute bg-white rounded-lg w-11/12 shadow-lg md:mx-52 md:w-7/12">
+        <ul className="absolute bg-white rounded-lg w-11/12 shadow-lg md:mx-52 md:w-7/12 z-10">
           {suggestions.map((suggestion) => (
             <li
               key={suggestion.id}

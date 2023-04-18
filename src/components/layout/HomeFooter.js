@@ -10,7 +10,7 @@ const HomeFooter = () => {
     const data = response.data;
   };
   return (
-    <div className="absolute w-screen bottom-0 text-sm md:text-xl text-gray-800 bg-gray-100">
+    <div className="absolute w-screen bottom-0 text-sm md:text-md text-gray-800 bg-gray-100">
       <div className="flex justify-center sm:justify-start border-b px-8 py-3">
         <ul>
           <li>

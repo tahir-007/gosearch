@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import Image from "next/image";
 
-export const FallbackFav = ({ src, alt, key }) => {
+export const FallBackImage = ({ src, alt, className, defaultImage }) => {
   const [imgSrc, setImgSrc] = useState(src);
 
   useEffect(() => {
@@ -10,11 +9,11 @@ export const FallbackFav = ({ src, alt, key }) => {
 
   return (
     <img
-      key={key}
-      src={imgSrc ? imgSrc : "/defaultFav.png"}
+      src={imgSrc ? imgSrc : defaultImage}
       alt={alt}
+      className={className}
       onError={() => {
-        setImgSrc("/defaultFav.png");
+        setImgSrc(defaultImage);
       }}
     />
   );

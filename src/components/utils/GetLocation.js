@@ -6,14 +6,20 @@ const GetLocation = () => {
   const [location, SetLocation] = useState("");
   //get location details
   useEffect(() => {
-    // fetch("https://ipapi.co/json")
-    //   .then((res) => res.json())
-    //   .then((data) => SetLocation(data));
-    axios.get("https://ipapi.co/json").then((response) => {
-      SetLocation(response.data);
-    });
+    axios
+      .get("https://ipapi.co/json")
+      .then((response) => {
+        SetLocation(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
-  return <div>{location.country_name}</div>;
+  return (
+    <div>
+      {location.city}, {location.country_name}
+    </div>
+  );
 };
 
 export default GetLocation;

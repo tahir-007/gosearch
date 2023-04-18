@@ -1,7 +1,7 @@
 import React from "react";
-import Footer from "@/components/layout/Footer";
-import { FallbackFav } from "@/components/utils/FallbackIFav";
+import { FallBackImage } from "../utils/FallBackImage";
 import { AiOutlineSearch, AiOutlineClose } from "react-icons/ai";
+import StringShortner from "../utils/StringShortner";
 
 const FetchWeb = ({ searchResults }) => {
   const convertUrl = (inputUrl) => {
@@ -13,22 +13,11 @@ const FetchWeb = ({ searchResults }) => {
         output += " > " + path[i];
       }
     }
-    if (output.split(" ").length > 6) {
-      return output.split(" ").slice(0, 6).join(" ") + "...";
+    if (output.split(" ").length > 4) {
+      return output.split(" ").slice(0, 4).join(" ") + "...";
     } else {
       return output;
     }
-  };
-
-  const convertDate = (inputDate) => {
-    if (inputDate) {
-      let date = new Date(inputDate);
-      let day = date.getDate().toString().padStart(2, "0");
-      let month = (date.getMonth() + 1).toString().padStart(2, "0");
-      let year = date.getFullYear();
-      return `${day}-${month}-${year}`;
-    }
-    return null;
   };
 
   const getFavicon = (inputLink) => {
@@ -43,11 +32,11 @@ const FetchWeb = ({ searchResults }) => {
     <>
       {searchResults.webPages.value?.length > 0 && (
         <>
-          <div className="flex p-2 text-gray-400 text-sm md:w-8/12 :w-5/12 md:mx-40">
+          <div className="flex p-2 text-gray-400 text-sm lg:w-5/12 lg:mx-52">
             About {searchResults.webPages.totalEstimatedMatches} results 0.35
             seconds
           </div>
-          <div className="space-y-3 md:w-7/12 md:mx-40 ">
+          <div className="space-y-3 lg:w-7/12 lg:mx-52 ">
             {searchResults.webPages.value?.map((searchResult) => (
               <div className="content-center" key={searchResult.id}>
                 <a
@@ -56,9 +45,11 @@ const FetchWeb = ({ searchResults }) => {
                 >
                   <div className="flex items-center">
                     <div className="w-6 p-1 mr-2 rounded-full bg-gray-100">
-                      <FallbackFav
+                      <FallBackImage
+                        className=""
                         src={getFavicon(searchResult.url)}
                         alt={searchResult.name}
+                        defaultImage={"/defaultFav.png"}
                       />
                     </div>
                     <p className="text-sm md:text-sm">
@@ -68,12 +59,12 @@ const FetchWeb = ({ searchResults }) => {
                   <h6 className="mb-2 text-lg md:text-xl font-semibold tracking-tight text-blue-800 hover:underline font-sans">
                     {searchResult.name}
                   </h6>
-                  <div className="flex">
-                    <p className="text-sm md:text-sm text-gray-700 dark:text-gray-400 content-between">
-                      <span className="text-xs text-gray-500 mr-2">
-                        {convertDate(searchResult.dateLastCrawled)}
-                      </span>
-                      {searchResult.snippet}
+                  <div className="flex items-center">
+                    <p className="flex text-sm md:text-sm text-gray-700 dark:text-gray-400 items-center">
+                      <StringShortner
+                        string={searchResult.snippet}
+                        stringLenth={20}
+                      />
                     </p>
                   </div>
                 </a>
@@ -84,8 +75,8 @@ const FetchWeb = ({ searchResults }) => {
       )}
       {searchResults.relatedSearches?.value.length > 0 && (
         <>
-          <p className="py-2 px-4 xl:text-xl md:mx-40 mt-8 mb-4">Related</p>
-          <ul className="md:grid md:grid-cols-2 md:gap-4 grid grid-cols-1 gap-2 md:mx-40 text-sm md:text-md mx-2  md:w-6/12 mb-14">
+          <p className="py-2 px-4 xl:text-xl md:mx-52 mt-8 mb-4">Related</p>
+          <ul className="md:grid md:grid-cols-2 md:gap-4 grid grid-cols-1 gap-2 md:mx-52 text-sm md:text-md mx-2  md:w-6/12 mb-14">
             {searchResults.relatedSearches.value?.map((related) => (
               <li
                 className="px-4 py-2 cursor-pointer text-black hover:underline flex items-center bg-gray-100 rounded-full"
@@ -99,7 +90,6 @@ const FetchWeb = ({ searchResults }) => {
           </ul>
         </>
       )}
-      <Footer />
     </>
   );
 };

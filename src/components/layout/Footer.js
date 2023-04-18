@@ -5,12 +5,8 @@ import GetLocation from "@/components/utils/GetLocation";
 // home page WebSearchFooter.
 
 const Footer = () => {
-  const getIp = () => {
-    const response = axios.get("https://ipapi.co/json/");
-    const data = response.data;
-  };
   return (
-    <div className="relative text-gray-800 bg-gray-100 mt-10">
+    <div className="relative text-gray-800 bg-gray-100 mt-10 bottom-0 w-full">
       <div className="flex justify-center sm:justify-start border-b px-8 py-3">
         <ul>
           <li>
