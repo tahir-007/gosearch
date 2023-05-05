@@ -103,11 +103,11 @@ const FetchData = ({ query, asPath }) => {
     return (
       <>
         <div
-          className="flex justify-center mx-2 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded"
+          className="flex justify-center w-fit mt-10 lg:mx-52 mx-12 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded dark:bg-gray-800 dark:border-red-900 "
           role="alert"
         >
           <strong className="font-bold">Error: </strong>
-          <span className="block sm:inline">{errorMessage}</span>
+          <span className="mx-2 block sm:inline">{errorMessage}</span>
         </div>
         <Footer />
       </>

@@ -1,12 +1,9 @@
 import { useState, useEffect } from "react";
 import { AiOutlineSearch, AiOutlineSetting } from "react-icons/ai";
-import { BsFillMicFill } from "react-icons/bs";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { MdClose } from "react-icons/md";
-import Image from "next/image";
 import axios from "axios";
 import Link from "next/link";
-import { TbGridDots } from "react-icons/tb";
 import FetchData from "@/components/FetchData";
 import SearchTypeHeader from "@/components/layout/SearchTypeHeader";
 import DarkMode from "../utils/DarkMode";
@@ -41,7 +38,6 @@ const HeaderSearchBar = ({ query, asPath }) => {
         }
       } catch (error) {
         console.error(error);
-        // handle the error here, for example by displaying an error message to the user
       }
     } else {
       setSuggestions([]);
@@ -67,7 +63,7 @@ const HeaderSearchBar = ({ query, asPath }) => {
         <GiHamburgerMenu className="flex-none md:hidden mx-2 bg-transparent text-gray-600 hover:bg-gray-200 rounded-full" />
         <div className="flex grow justify-center md:flex-none md:justify-start">
           <Link href="/">
-            <div className="flex text-4xl">
+            <div className="flex text-4xl lg:text-5xl font-medium">
               <span className="text-blue-500 dark:text-gray-300">g</span>
               <span className="text-red-500 dark:text-gray-300">o</span>
               <span className="text-yellow-400 dark:text-gray-300">S</span>
@@ -81,11 +77,11 @@ const HeaderSearchBar = ({ query, asPath }) => {
         </div>
         <form
           onSubmit={handleSubmit}
-          className="hidden md:flex-grow md:flex md:justify-start md:mx-4 md:w-screen items-center mt-3 h-12 border border-gray-200 rounded-full hover:shadow-md transition-shadow focus-within:shadaw-md dark:border-gray-600"
+          className="hidden md:flex-grow md:flex md:justify-start md:mx-4 md:w-screen items-center mt-3 h-12 border border-gray-300 rounded-full hover:shadow-md transition-shadow focus-within:shadaw-md dark:border-gray-600"
         >
           <input
             type="text"
-            className="flex-grow text-sm px-6 md:text-sm border-transparent focus:border-transparent focus:ring-0 rounded-full dark:bg-gray-900 dark:text-gray-3 "
+            className="flex-grow text-sm px-6 md:text-sm border-transparent focus:border-transparent focus:ring-0 rounded-full text-gray-700  dark:bg-gray-900 dark:text-gray-300 "
             placeholder=""
             value={changeData}
             onChange={handleChange}
@@ -104,8 +100,6 @@ const HeaderSearchBar = ({ query, asPath }) => {
           <AiOutlineSearch className="flex text-sx sm:text-xl  text-blue-500 mr-4" />
         </form>
         <div className="flex md:w-6/12 md:justify-end items-center">
-          {/* <AiOutlineSetting className="hidden bg-transparent text-gray-600 hover:bg-gray-200 rounded-full text-4xl p-2" />
-          <TbGridDots className="hidden bg-transparent text-gray-600 hover:bg-gray-200 rounded-full text-4xl p-2 mr-2" /> */}
           <DarkMode />
           <button className="ml-4 flex-none text-sm bg-blue-600 text-white px-2 py-2 md:px-4 font-bold rounded-md hover:brightness-105 hover:shadow-md transition-shadow">
             Sign in
@@ -114,7 +108,7 @@ const HeaderSearchBar = ({ query, asPath }) => {
       </div>
       <form
         onSubmit={handleSubmit}
-        className="flex md:hidden items-center my-3 h-12 mx-2 border border-gray-200 rounded-full hover:shadow-md transition-shadow focus-within:shadaw-md dark:border-gray-600"
+        className="flex md:hidden items-center my-3 h-12 mx-2 border border-gray-500 rounded-full hover:shadow-md transition-shadow focus-within:shadaw-md dark:border-gray-600"
       >
         <input
           type="text"
