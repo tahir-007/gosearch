@@ -1,16 +1,12 @@
 import React, { useState } from "react";
-import { AiOutlineSearch, AiOutlineClose } from "react-icons/ai";
-import { BsFillMicFill } from "react-icons/bs";
+import { AiOutlineSearch } from "react-icons/ai";
 import { MdClose } from "react-icons/md";
-import Image from "next/image";
 import axios from "axios";
 import { useRouter } from "next/router";
 
 const HomeSearchBar = () => {
   const [changeData, setchangeData] = useState("");
   const [suggestions, setSuggestions] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const router = useRouter();
 
   const handleChange = async (event) => {
     const searchWord = event.target.value;
@@ -26,7 +22,8 @@ const HomeSearchBar = () => {
       },
     };
     if (searchWord.length >= 3) {
-      await axios.get(url, config).then((response) => {
+      try {
+        const response = await axios.get(url, config);
         if (searchWord === "") {
           setSuggestions([]);
         } else {
@@ -34,7 +31,10 @@ const HomeSearchBar = () => {
             response.data["suggestionGroups"][0]["searchSuggestions"]
           );
         }
-      });
+      } catch (error) {
+        console.error(error);
+        // handle the error here, for example by displaying an error message to the user
+      }
     } else {
       setSuggestions([]);
     }
@@ -60,12 +60,12 @@ const HomeSearchBar = () => {
         <div className="flex justify-center w-screen items-center">
           <form
             onSubmit={handleSubmit}
-            className="flex items-center w-screen mt-5 h-12 mx-3 md:h-12 md:w-8/12 xl:w-5/12 border border-gray-200 px-3 rounded-full hover:shadow-md transition-shadow focus-within:shadaw-md"
+            className="flex items-center w-screen mt-5 h-12 mx-3 md:h-12 md:w-8/12 xl:w-5/12 border border-gray-200 px-3 rounded-full hover:shadow-md transition-shadow focus-within:shadaw-md dark:border-gray-500"
           >
-            <AiOutlineSearch className="flex sm:text-xl text-gray-500" />
+            <AiOutlineSearch className="flex text-lg text-gray-500" />
             <input
               type="text"
-              className="flex-grow md:text-sm border-transparent dark:bg-gray-700 focus:border-transparent focus:ring-0 rounded-full "
+              className="flex-grow md:text-sm border-transparent dark:bg-gray-900 focus:border-transparent focus:ring-0 rounded-full "
               placeholder=""
               value={changeData}
               onChange={handleChange}
@@ -74,11 +74,8 @@ const HomeSearchBar = () => {
               <>
                 <MdClose
                   onClick={handleClear}
-                  className="mt-1 text-xs sm:mt-2 sm:text-xl cursor-pointer text-gray-500 hover:text-gray-600 "
+                  className="text-lg cursor-pointer text-gray-500 hover:text-gray-600 "
                 />
-                <span className="flex align-middle text-xs sm:text-xl mx-2 text-gray-300">
-                  |
-                </span>
               </>
             )}
           </form>

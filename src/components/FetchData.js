@@ -16,6 +16,7 @@ const FetchData = ({ query, asPath }) => {
   const [nextPageCount, setNextPageCount] = useState(
     asPath === "/images" || asPath === "/videos" ? 48 : 15
   );
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -74,10 +75,14 @@ const FetchData = ({ query, asPath }) => {
       },
     };
     const fetchData = async () => {
-      const result = await axios.get(url, config).then((response) => {
-        setSearchResults(response.data);
+      try {
+        const result = await axios.get(url, config);
+        setSearchResults(result.data);
         setIsLoading(false);
-      });
+      } catch (error) {
+        setIsLoading(false);
+        setErrorMessage(error.message);
+      }
     };
     fetchData();
   }, []);
@@ -92,6 +97,20 @@ const FetchData = ({ query, asPath }) => {
           height={20}
         ></Image>
       </div>
+    );
+  }
+  if (errorMessage) {
+    return (
+      <>
+        <div
+          className="flex justify-center mx-2 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded"
+          role="alert"
+        >
+          <strong className="font-bold">Error: </strong>
+          <span className="block sm:inline">{errorMessage}</span>
+        </div>
+        <Footer />
+      </>
     );
   }
   if (asPath === "/web") {

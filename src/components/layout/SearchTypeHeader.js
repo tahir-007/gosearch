@@ -10,7 +10,7 @@ import { MdSlowMotionVideo } from "react-icons/md";
 
 const SearchTypeHeader = ({ query, asPath }) => {
   return (
-    <ul className="flex space-x-3 border-b py-2 items-center md:w-8/12 md:mx-52 ">
+    <ul className="flex space-x-3 border-b py-2 items-center text-gray-600 dark:text-gray-200 md:w-8/12 md:mx-52 ">
       <li
         className={`flex items-center cursor-pointer ${
           asPath === "/web" ? "border-b-2 border-blue-700" : ""

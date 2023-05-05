@@ -10,8 +10,8 @@ const HomeFooter = () => {
     const data = response.data;
   };
   return (
-    <div className="absolute w-screen bottom-0 text-sm md:text-md text-gray-800 bg-gray-100">
-      <div className="flex justify-center sm:justify-start border-b px-8 py-3">
+    <div className="absolute w-screen bottom-0 text-sm md:text-md text-gray-800 bg-gray-100 dark:bg-gray-950 dark:text-gray-400">
+      <div className="flex justify-center sm:justify-start border-b dark:border-gray-500 px-8 py-3">
         <ul>
           <li>
             <GetLocation />

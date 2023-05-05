@@ -32,16 +32,16 @@ const FetchWeb = ({ searchResults }) => {
     <>
       {searchResults.webPages.value?.length > 0 && (
         <>
-          <div className="flex p-2 text-gray-400 text-sm lg:w-5/12 lg:mx-52">
+          <div className="flex p-2 text-gray-400 text-sm lg:w-5/12 lg:mx-52 ">
             About {searchResults.webPages.totalEstimatedMatches} results 0.35
             seconds
           </div>
-          <div className="space-y-3 lg:w-7/12 lg:mx-52 ">
+          <div className="space-y-3 lg:w-7/12 lg:mx-52  ">
             {searchResults.webPages.value?.map((searchResult) => (
               <div className="content-center" key={searchResult.id}>
                 <a
                   href={searchResult.url}
-                  className="block p-2 bg-white border shadow-md rounded-xl content-center"
+                  className="block p-2 bg-white border shadow-md rounded-xl content-center dark:bg-gray-700 dark:text-gray-400"
                 >
                   <div className="flex items-center">
                     <div className="w-6 p-1 mr-2 rounded-full bg-gray-100">
@@ -76,10 +76,10 @@ const FetchWeb = ({ searchResults }) => {
       {searchResults.relatedSearches?.value.length > 0 && (
         <>
           <p className="py-2 px-4 xl:text-xl md:mx-52 mt-8 mb-4">Related</p>
-          <ul className="md:grid md:grid-cols-2 md:gap-4 grid grid-cols-1 gap-2 md:mx-52 text-sm md:text-md mx-2  md:w-6/12 mb-14">
+          <ul className="md:grid md:grid-cols-2 md:gap-4 grid grid-cols-1 gap-2 md:mx-52 text-sm md:text-md mx-2  md:w-6/12 mb-14 ">
             {searchResults.relatedSearches.value?.map((related) => (
               <li
-                className="px-4 py-2 cursor-pointer text-black hover:underline flex items-center bg-gray-100 rounded-full"
+                className="px-4 py-2 cursor-pointer text-black hover:underline flex items-center bg-gray-100 rounded-full dark:bg-gray-800 dark:text-gray-400"
                 onClick={() => handleSelect(related)}
                 key={related.id}
               >

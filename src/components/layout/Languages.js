@@ -4,7 +4,7 @@ import React from "react";
 const Languages = () => {
   return (
     <>
-      <div className="flex justify-center pt-12 pb-4">
+      <div className="flex justify-center pt-12 pb-4 dark:text-gray-400">
         <ul>
           <li>Search Offered In</li>
         </ul>

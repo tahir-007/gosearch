@@ -6,7 +6,7 @@ import GetLocation from "@/components/utils/GetLocation";
 
 const Footer = () => {
   return (
-    <div className="relative text-gray-800 bg-gray-100 mt-10 bottom-0 w-full">
+    <div className="fixed text-gray-800 bg-gray-100 mt-10 bottom-0 w-full dark:bg-gray-700 dark:text-gray-400">
       <div className="flex justify-center sm:justify-start border-b px-8 py-3">
         <ul>
           <li>

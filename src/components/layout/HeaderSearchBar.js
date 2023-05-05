@@ -9,6 +9,7 @@ import Link from "next/link";
 import { TbGridDots } from "react-icons/tb";
 import FetchData from "@/components/FetchData";
 import SearchTypeHeader from "@/components/layout/SearchTypeHeader";
+import DarkMode from "../utils/DarkMode";
 
 const HeaderSearchBar = ({ query, asPath }) => {
   const [changeData, setChangeData] = useState(query);
@@ -29,7 +30,8 @@ const HeaderSearchBar = ({ query, asPath }) => {
       },
     };
     if (searchWord.length >= 3) {
-      await axios.get(url, config).then((response) => {
+      try {
+        const response = await axios.get(url, config);
         if (searchWord === "") {
           setSuggestions([]);
         } else {
@@ -37,7 +39,10 @@ const HeaderSearchBar = ({ query, asPath }) => {
             response.data["suggestionGroups"][0]["searchSuggestions"]
           );
         }
-      });
+      } catch (error) {
+        console.error(error);
+        // handle the error here, for example by displaying an error message to the user
+      }
     } else {
       setSuggestions([]);
     }
@@ -57,26 +62,30 @@ const HeaderSearchBar = ({ query, asPath }) => {
     setSuggestions([]);
   };
   return (
-    <div className="w-full px-2">
-      <div className="flex items-center my-2">
+    <div className="w-full min-h-screen bg-white dark:bg-gray-900">
+      <div className="flex items-center py-2 mx-2">
         <GiHamburgerMenu className="flex-none md:hidden mx-2 bg-transparent text-gray-600 hover:bg-gray-200 rounded-full" />
         <div className="flex grow justify-center md:flex-none md:justify-start">
           <Link href="/">
-            <Image
-              src="/gosearch.webp"
-              alt="goSearch image"
-              width={200}
-              height={70}
-            ></Image>
+            <div className="flex text-4xl">
+              <span className="text-blue-500 dark:text-gray-300">g</span>
+              <span className="text-red-500 dark:text-gray-300">o</span>
+              <span className="text-yellow-400 dark:text-gray-300">S</span>
+              <span className="text-blue-500 dark:text-gray-300">e</span>
+              <span className="text-green-500 dark:text-gray-300">a</span>
+              <span className="text-red-500 dark:text-gray-300">r</span>
+              <span className="text-yellow-400 dark:text-gray-300">c</span>
+              <span className="text-blue-500 dark:text-gray-300">h</span>
+            </div>
           </Link>
         </div>
         <form
           onSubmit={handleSubmit}
-          className="hidden md:flex-grow md:flex md:justify-start md:mx-4 md:w-screen items-center mt-3 h-12 border border-gray-200 rounded-full hover:shadow-md transition-shadow focus-within:shadaw-md"
+          className="hidden md:flex-grow md:flex md:justify-start md:mx-4 md:w-screen items-center mt-3 h-12 border border-gray-200 rounded-full hover:shadow-md transition-shadow focus-within:shadaw-md dark:border-gray-600"
         >
           <input
             type="text"
-            className="flex-grow text-sm px-6 md:text-sm border-transparent focus:border-transparent focus:ring-0 rounded-full "
+            className="flex-grow text-sm px-6 md:text-sm border-transparent focus:border-transparent focus:ring-0 rounded-full dark:bg-gray-900 dark:text-gray-3 "
             placeholder=""
             value={changeData}
             onChange={handleChange}
@@ -85,30 +94,31 @@ const HeaderSearchBar = ({ query, asPath }) => {
             <>
               <MdClose
                 onClick={handleClear}
-                className="mt-1 text-sm sm:text-xl cursor-pointer text-gray-500 hover:text-gray-600 "
+                className="text-sm sm:text-xl cursor-pointer text-gray-500 hover:text-gray-600 "
               />
-              <span className="flex align-middle text-xs sm:text-xl mx-2 text-gray-300">
+              <span className="flex -mt-1 align-middle text-xs sm:text-xl mx-2 text-gray-300 dark:text-gray-500">
                 |
               </span>
             </>
           )}
           <AiOutlineSearch className="flex text-sx sm:text-xl  text-blue-500 mr-4" />
         </form>
-        <div className="flex md:w-6/12 md:justify-end">
-          <AiOutlineSetting className="hidden bg-transparent text-gray-600 hover:bg-gray-200 rounded-full text-4xl p-2" />
-          <TbGridDots className="hidden bg-transparent text-gray-600 hover:bg-gray-200 rounded-full text-4xl p-2 mr-2" />
-          <button className="flex-none text-sm bg-blue-600 text-white px-2 py-2 md:px-4 font-bold rounded-md hover:brightness-105 hover:shadow-md transition-shadow">
+        <div className="flex md:w-6/12 md:justify-end items-center">
+          {/* <AiOutlineSetting className="hidden bg-transparent text-gray-600 hover:bg-gray-200 rounded-full text-4xl p-2" />
+          <TbGridDots className="hidden bg-transparent text-gray-600 hover:bg-gray-200 rounded-full text-4xl p-2 mr-2" /> */}
+          <DarkMode />
+          <button className="ml-4 flex-none text-sm bg-blue-600 text-white px-2 py-2 md:px-4 font-bold rounded-md hover:brightness-105 hover:shadow-md transition-shadow">
             Sign in
           </button>
         </div>
       </div>
       <form
         onSubmit={handleSubmit}
-        className="flex md:hidden items-center my-3 h-12 border border-gray-200 rounded-full hover:shadow-md transition-shadow focus-within:shadaw-md"
+        className="flex md:hidden items-center my-3 h-12 mx-2 border border-gray-200 rounded-full hover:shadow-md transition-shadow focus-within:shadaw-md dark:border-gray-600"
       >
         <input
           type="text"
-          className="flex-grow text-md px-6 md:text-sm border-transparent focus:border-transparent focus:ring-0 rounded-full "
+          className="flex-grow text-md px-6 md:text-sm border-transparent focus:border-transparent focus:ring-0 rounded-full dark:bg-gray-900 dark:text-gray-300 "
           placeholder=""
           value={changeData}
           onChange={handleChange}
@@ -117,9 +127,9 @@ const HeaderSearchBar = ({ query, asPath }) => {
           <>
             <MdClose
               onClick={handleClear}
-              className="mt-1 text-xl cursor-pointer text-gray-500 hover:text-gray-600 "
+              className="text-xl cursor-pointer text-gray-500 hover:text-gray-600 "
             />
-            <span className="flex align-middle text-lg sm:text-xl mx-2 text-gray-300">
+            <span className="flex -mt-1 align-middle text-lg sm:text-xl mx-2 text-gray-300 dark:text-gray-500">
               |
             </span>
           </>

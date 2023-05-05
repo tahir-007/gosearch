@@ -29,7 +29,7 @@ export default function Home() {
         <meta name="author" content="Tahir Patel" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
-      <div className="w-screen text-gray-700 bg-white dark:bg-gray-700 dark:text-white">
+      <main className="w-screen text-gray-700 min-h-screen bg-white dark:bg-gray-900 dark:text-white">
         <Header />
         <Logo />
         <div className="">
@@ -37,7 +37,7 @@ export default function Home() {
         </div>
         <Languages />
         <HomeFooter />
-      </div>
+      </main>
     </>
   );
 }
