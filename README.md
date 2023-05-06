@@ -20,7 +20,7 @@ This project showcases my technical skills in utilizing APIs and programming lan
 
 Contributions are always welcome!
 
-Contributing We welcome contributions from anyone interested in improving this project. If you would like to contribute, please follow the guidelines below:
+We welcome contributions from anyone interested in improving this project. If you would like to contribute, please follow the guidelines below:
 
 1. Fork the repository
 2. Create a new branch for your feature or bug fix
