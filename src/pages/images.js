@@ -1,21 +1,24 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import HeaderSearchBar from "@/components/layout/HeaderSearchBar";
 
 const Images = () => {
   const router = useRouter();
+  const { query, pathname } = router; // Destructuring query and pathname from router
 
   useEffect(() => {
-    localStorage.setItem("fullUrl", JSON.stringify(router));
-  }, [router]);
+    // Storing only the necessary data instead of the entire router object
+    localStorage.setItem("fullUrl", JSON.stringify({ query, pathname }));
+  }, [query, pathname]); // Adding query and pathname as dependencies
 
   return (
     <>
-      {router.query.q && (
-        <HeaderSearchBar query={router.query.q} asPath={router.pathname} />
+      {query.q && (
+        // Using destructured query and pathname
+        <HeaderSearchBar query={query.q} asPath={pathname} />
       )}
     </>
   );
 };
 
-export default Images;
+export default React.memo(Images);

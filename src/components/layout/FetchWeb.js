@@ -3,7 +3,9 @@ import { FallBackImage } from "../utils/FallBackImage";
 import { AiOutlineSearch, AiOutlineClose } from "react-icons/ai";
 import StringShortner from "../utils/StringShortner";
 
+// FetchWeb component
 const FetchWeb = ({ searchResults }) => {
+  // Function to convert a URL into a readable format
   const convertUrl = (inputUrl) => {
     let url = new URL(inputUrl);
     let path = url.pathname.split("/");
@@ -13,18 +15,21 @@ const FetchWeb = ({ searchResults }) => {
         output += " > " + path[i];
       }
     }
-    if (output.split(" ").length > 4) {
-      return output.split(" ").slice(0, 4).join(" ") + "...";
+    let outputSplit = output.split(" ");
+    if (outputSplit.length > 4) {
+      return outputSplit.slice(0, 4).join(" ") + "...";
     } else {
       return output;
     }
   };
 
+  // Function to get the favicon of a website
   const getFavicon = (inputLink) => {
     let url = new URL(inputLink);
     return url.origin + "/favicon.ico";
   };
 
+  // Function to handle selection of a search result
   const handleSelect = (related) => {
     window.location.assign(`/web?q=${related.displayText}`);
   };

@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { AiOutlineSearch, AiOutlineSetting } from "react-icons/ai";
+import React, { useState, useCallback } from "react";
+import { AiOutlineSearch } from "react-icons/ai";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { MdClose } from "react-icons/md";
 import axios from "axios";
@@ -9,29 +9,37 @@ import SearchTypeHeader from "@/components/layout/SearchTypeHeader";
 import DarkMode from "../utils/DarkMode";
 
 const HeaderSearchBar = ({ query, asPath }) => {
-  const [changeData, setChangeData] = useState(query);
+  const [searchTerm, setSearchTerm] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [fetchQuery, setFetchQuery] = useState(query);
 
+  // Function to handle changes to the search input
   const handleChange = async (event) => {
+    // Get the current value of the search input
     const searchWord = event.target.value;
-    setChangeData(searchWord);
+    // Update the searchTerm state variable
+    setSearchTerm(searchWord);
+    // Set the URL for the Bing Suggestions API
     const url = "https://api.bing.microsoft.com/v7.0/Suggestions";
-    const apiKey = process.env.BING_API_KEY;
+    // Set the config object for the API request
     const config = {
       params: {
         query: searchWord,
       },
       headers: {
-        "Ocp-Apim-Subscription-Key": process.env.NEXT_PUBLIC_BING_API_KEY,
+        "Ocp-Apim-Subscription-Key": process.env.BING_API_KEY,
       },
     };
+    // Only make the API request if the searchWord is at least 3 characters long
     if (searchWord.length >= 3) {
       try {
+        // Make the API request
         const response = await axios.get(url, config);
+        // If the searchWord is empty, clear the suggestions
         if (searchWord === "") {
           setSuggestions([]);
         } else {
+          // Otherwise, update the suggestions state variable with the API response data
           setSuggestions(
             response.data["suggestionGroups"][0]["searchSuggestions"]
           );
@@ -40,23 +48,29 @@ const HeaderSearchBar = ({ query, asPath }) => {
         console.error(error);
       }
     } else {
+      // If the searchWord is less than 3 characters long, clear the suggestions
       setSuggestions([]);
     }
   };
 
+  // Function to handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    window.location.assign(`${asPath}?q=${changeData}`);
+    // Redirect to the search results page with the current searchTerm as a query parameter
+    window.location.assign(`/web?q=${searchTerm}`);
   };
 
-  const handleSelect = (suggestion) => {
-    window.location.assign(`${asPath}?q=${suggestion}`);
-  };
+  // Memoized handleSelect function using useCallback
+  const handleSelect = useCallback((suggestion) => {
+    window.location.assign(`/web?q=${suggestion}`);
+  }, []);
 
-  const handleClear = () => {
-    setChangeData("");
+  // Memoized handleClear function using useCallback
+  const handleClear = useCallback(() => {
+    setSearchTerm("");
     setSuggestions([]);
-  };
+  }, []);
+
   return (
     <div className="w-full min-h-screen bg-white dark:bg-gray-900">
       <div className="flex items-center py-2 mx-2">
@@ -83,10 +97,10 @@ const HeaderSearchBar = ({ query, asPath }) => {
             type="text"
             className="flex-grow text-sm px-6 md:text-sm border-transparent focus:border-transparent focus:ring-0 rounded-full text-gray-700  dark:bg-gray-900 dark:text-gray-300 "
             placeholder=""
-            value={changeData}
+            value={searchTerm}
             onChange={handleChange}
           />
-          {changeData?.length > 0 && (
+          {searchTerm?.length > 0 && (
             <>
               <MdClose
                 onClick={handleClear}
@@ -114,10 +128,10 @@ const HeaderSearchBar = ({ query, asPath }) => {
           type="text"
           className="flex-grow text-md px-6 md:text-sm border-transparent focus:border-transparent focus:ring-0 rounded-full dark:bg-gray-900 dark:text-gray-300 "
           placeholder=""
-          value={changeData}
+          value={searchTerm}
           onChange={handleChange}
         />
-        {changeData?.length > 0 && (
+        {searchTerm?.length > 0 && (
           <>
             <MdClose
               onClick={handleClear}
@@ -151,4 +165,4 @@ const HeaderSearchBar = ({ query, asPath }) => {
   );
 };
 
-export default HeaderSearchBar;
+export default React.memo(HeaderSearchBar);

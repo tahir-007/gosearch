@@ -1,13 +1,9 @@
 import Head from "next/head";
-import { Inter } from "next/font/google";
 import Header from "@/components/layout/Header";
-import Image from "next/image";
 import HomeSearchBar from "@/components/layout/HomeSearchBar";
 import Languages from "@/components/layout/Languages";
 import Logo from "@/components/layout/Logo";
 import HomeFooter from "@/components/layout/HomeFooter";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   return (

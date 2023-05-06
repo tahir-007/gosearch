@@ -1,10 +1,5 @@
-import { useState, useEffect } from "react";
-import {
-  AiOutlineSearch,
-  AiOutlineCamera,
-  AiOutlineGlobal,
-} from "react-icons/ai";
-
+import { AiOutlineCamera, AiOutlineGlobal } from "react-icons/ai";
+import React from "react";
 import { GiNewspaper } from "react-icons/gi";
 import { MdSlowMotionVideo } from "react-icons/md";
 
@@ -51,4 +46,4 @@ const SearchTypeHeader = ({ query, asPath }) => {
   );
 };
 
-export default SearchTypeHeader;
+export default React.memo(SearchTypeHeader);

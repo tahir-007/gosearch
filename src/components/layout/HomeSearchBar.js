@@ -1,58 +1,70 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { MdClose } from "react-icons/md";
 import axios from "axios";
-import { useRouter } from "next/router";
 
 const HomeSearchBar = () => {
-  const [changeData, setchangeData] = useState("");
+  // State variables for the search term and suggestions
+  const [searchTerm, setSearchTerm] = useState("");
   const [suggestions, setSuggestions] = useState([]);
 
+  // Function to handle changes to the search input
   const handleChange = async (event) => {
+    // Get the current value of the search input
     const searchWord = event.target.value;
-    setchangeData(searchWord);
+    // Update the searchTerm state variable
+    setSearchTerm(searchWord);
+    // Set the URL for the Bing Suggestions API
     const url = "https://api.bing.microsoft.com/v7.0/Suggestions";
-    const apiKey = process.env.BING_API_KEY;
+    // Set the config object for the API request
     const config = {
       params: {
         query: searchWord,
       },
       headers: {
-        "Ocp-Apim-Subscription-Key": process.env.NEXT_PUBLIC_BING_API_KEY,
+        "Ocp-Apim-Subscription-Key": process.env.BING_API_KEY,
       },
     };
+    // Only make the API request if the searchWord is at least 3 characters long
     if (searchWord.length >= 3) {
       try {
+        // Make the API request
         const response = await axios.get(url, config);
+        // If the searchWord is empty, clear the suggestions
         if (searchWord === "") {
           setSuggestions([]);
         } else {
+          // Otherwise, update the suggestions state variable with the API response data
           setSuggestions(
             response.data["suggestionGroups"][0]["searchSuggestions"]
           );
         }
       } catch (error) {
         console.error(error);
-        // handle the error here, for example by displaying an error message to the user
       }
     } else {
+      // If the searchWord is less than 3 characters long, clear the suggestions
       setSuggestions([]);
     }
   };
 
+  // Function to handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    window.location.assign(`/web?q=${changeData}`);
+    // Redirect to the search results page with the current searchTerm as a query parameter
+    window.location.assign(`/web?q=${searchTerm}`);
   };
 
-  const handleSelect = (suggestion) => {
+  // Memoized handleSelect function using useCallback
+  const handleSelect = useCallback((suggestion) => {
     window.location.assign(`/web?q=${suggestion}`);
-  };
+  }, []);
 
-  const handleClear = () => {
-    setchangeData("");
+  // Memoized handleClear function using useCallback
+  const handleClear = useCallback(() => {
+    setSearchTerm("");
     setSuggestions([]);
-  };
+  }, []);
 
   return (
     <div className="relative">
@@ -67,10 +79,10 @@ const HomeSearchBar = () => {
               type="text"
               className="flex-grow md:text-sm border-transparent dark:bg-gray-900 focus:border-transparent focus:ring-0 rounded-full "
               placeholder=""
-              value={changeData}
+              value={searchTerm}
               onChange={handleChange}
             />
-            {changeData.length > 0 && (
+            {searchTerm.length > 0 && (
               <>
                 <MdClose
                   onClick={handleClear}
@@ -99,5 +111,4 @@ const HomeSearchBar = () => {
     </div>
   );
 };
-
-export default HomeSearchBar;
+export default React.memo(HomeSearchBar);
